@@ -1,7 +1,7 @@
 import unittest
-import main
+import board
 
-board = [
+board1 = [
     [0, 0, 5, 0, 0, 0, 9, 0, 0],
     [4, 0, 0, 0, 6, 0, 0, 0, 2],
     [0, 7, 0, 4, 3, 0, 0, 0, 8],
@@ -12,7 +12,6 @@ board = [
     [0, 4, 3, 2, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 5, 0, 7, 8, 0]
 ]
-
 
 board_col_ok = [
     [0, 0, 5],
@@ -75,24 +74,37 @@ board_not_safe_row = [
 class TestIsSafeFunctions(unittest.TestCase):
 
     def test_is_used_col(self):
-        self.assertFalse(main.is_used_col(board_col_ok, 0, 2))
-        self.assertTrue(main.is_used_col(board_col_no, 0, 2))
+        testboard_col_ok = board.board_9(board_col_ok)
+        testboard_col_no = board.board_9(board_col_no)
+        
+        self.assertFalse(testboard_col_ok.is_used_col(0, 2))
+        self.assertTrue(testboard_col_no.is_used_col(0, 2))
 
     def test_is_used_row(self):
-        self.assertFalse(main.is_used_row(board_row_ok, 0, 2))
-        self.assertTrue(main.is_used_row(board_row_no, 0, 2))
+        testboard_row_ok = board.board_9(board_row_ok)
+        testboard_row_no = board.board_9(board_row_no)
+        
+        self.assertFalse(testboard_row_ok.is_used_row(0, 2))
+        self.assertTrue(testboard_row_no.is_used_row(0, 2))
 
     def test_is_used_box(self):
-        self.assertFalse(main.is_used_box(board_box, 0, 2))
-        self.assertTrue(main.is_used_box(board_box, 1, 0))
-        self.assertFalse(main.is_used_box(board_box, 1, 2))
+        testboard_box = board.board_9(board_box)
+
+        self.assertFalse(testboard_box.is_used_box(0, 2))
+        self.assertTrue(testboard_box.is_used_box(1, 0))
+        self.assertFalse(testboard_box.is_used_box(1, 2))
 
     def test_is_safe(self):
-        self.assertFalse(main.is_safe(board_box, 0, 1))
-        self.assertTrue(main.is_safe(board_safe, 1, 5))
-        self.assertTrue(main.is_safe(board_safe, 2, 4))
-        self.assertTrue(main.is_safe(board_safe, 3, 4))
-        self.assertFalse(main.is_safe(board_not_safe_col, 0, 1))
-        self.assertFalse(main.is_safe(board_not_safe_row, 0, 1))
+        
+        testboard_box = board.board_9(board_box)
+        testboard_safe = board.board_9(board_safe)
+        testboard_not_safe_col = board.board_9(board_not_safe_col)
+        testboard_not_safe_row = board.board_9(board_not_safe_row)
+        
+        self.assertFalse(testboard_box.is_safe( 0, 1))
+        self.assertTrue(testboard_safe.is_safe( 1, 5))
+        self.assertTrue(testboard_safe.is_safe( 2, 4))
+        self.assertFalse(testboard_not_safe_col.is_safe(0, 1))
+        self.assertFalse(testboard_not_safe_row.is_safe(0, 1))
 
 
