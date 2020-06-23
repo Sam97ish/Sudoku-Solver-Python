@@ -1,5 +1,5 @@
 
-class board_9(object):
+class Board_9(object):
     ''' 9*9 sudoku board '''
     board_list  = [[]]
     unsolved_board  = [[]]
